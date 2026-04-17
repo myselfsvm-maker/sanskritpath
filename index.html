@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanskrit Path — Learn Sanskrit Step by Step</title>
+  <meta name="description" content="An interactive Sanskrit learning app covering alphabet, vocabulary, grammar, quizzes and progress tracking." />
+
+  <!-- Favicon inline SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ॐ</text></svg>" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ╔══════════════════════════════════════╗
+       ║             TOP BAR                  ║
+       ╚══════════════════════════════════════╝ -->
+  <header class="topbar">
+    <div class="topbar-logo">
+      <span class="logo-deva">ॐ</span>
+      <span class="logo-text">Sanskrit Path</span>
+    </div>
+    <div class="topbar-stats">
+      <div class="stat-pill">
+        <span class="stat-icon">✨</span>
+        <span id="xp-count">0</span> XP
+      </div>
+      <div class="stat-pill">
+        <span class="stat-icon">🔥</span>
+        <span id="streak-count">0</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-icon">📖</span>
+        <span id="lessons-done">0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ╔══════════════════════════════════════╗
+       ║              NAVBAR                  ║
+       ╚══════════════════════════════════════╝ -->
+  <nav class="navbar">
+    <button class="nav-btn active" data-section="home">🏠 Home</button>
+    <button class="nav-btn" data-section="alphabet">🔤 Alphabet</button>
+    <button class="nav-btn" data-section="words">📚 Words</button>
+    <button class="nav-btn" data-section="grammar">⚖️ Grammar</button>
+    <button class="nav-btn" data-section="quiz">🎯 Quiz</button>
+    <button class="nav-btn" data-section="flashcards">🃏 Flashcards</button>
+    <button class="nav-btn" data-section="progress">📊 Progress</button>
+  </nav>
+
+  <!-- ╔══════════════════════════════════════╗
+       ║           MAIN CONTENT               ║
+       ╚══════════════════════════════════════╝ -->
+  <main>
+
+    <!-- ═══ HOME ═══════════════════════════════════════════ -->
+    <section id="section-home" class="section active">
+      <div class="hero">
+        <div class="hero-badge">Begin Your Journey</div>
+        <h1>Learn <em>Sanskrit</em><br/>Step by Step</h1>
+        <div class="hero-deva">संस्कृतं पठामः</div>
+        <p class="hero-sub">The mother of all Indo-European languages — perfected, eternal, and alive. Start with the alphabet, build vocabulary, master grammar.</p>
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="navigate('alphabet')">Start Learning →</button>
+          <button class="btn-secondary" onclick="navigate('quiz')">Take a Quiz</button>
+        </div>
+      </div>
+
+      <!-- Progress strip -->
+      <div style="padding:0 24px;">
+        <div class="home-progress-strip">
+          <span class="progress-label">Your Progress</span>
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-bar" style="width:0%"></div>
+          </div>
+          <span class="progress-pct-label" id="progress-pct">0%</span>
+        </div>
+      </div>
+
+      <!-- Feature cards -->
+      <div class="feature-cards">
+        <div class="feature-card" onclick="navigate('alphabet')">
+          <div class="feature-icon">🔤</div>
+          <div class="feature-title">Alphabet</div>
+          <div class="feature-desc">13 vowels, 4 sibilants, 25 stop consonants — learn them all with audio guides and interactive cards.</div>
+        </div>
+        <div class="feature-card" onclick="navigate('words')">
+          <div class="feature-icon">📚</div>
+          <div class="feature-title">Vocabulary</div>
+          <div class="feature-desc">Nature, body, numbers, greetings and verbs — build a core Sanskrit lexicon step by step.</div>
+        </div>
+        <div class="feature-card" onclick="navigate('grammar')">
+          <div class="feature-icon">⚖️</div>
+          <div class="feature-title">Grammar</div>
+          <div class="feature-desc">Gender, 8 cases, verb conjugation, Sandhi rules — the elegant architecture of Sanskrit.</div>
+        </div>
+        <div class="feature-card" onclick="navigate('quiz')">
+          <div class="feature-icon">🎯</div>
+          <div class="feature-title">Quizzes</div>
+          <div class="feature-desc">Test your knowledge with curated quizzes. Earn XP, unlock badges and track your best scores.</div>
+        </div>
+        <div class="feature-card" onclick="navigate('flashcards')">
+          <div class="feature-icon">🃏</div>
+          <div class="feature-title">Flashcards</div>
+          <div class="feature-desc">Flip through Devanagari characters and vocabulary with classic spaced-repetition flashcards.</div>
+        </div>
+        <div class="feature-card" onclick="navigate('progress')">
+          <div class="feature-icon">📊</div>
+          <div class="feature-title">Progress</div>
+          <div class="feature-desc">Track XP, streaks, quiz scores and earn achievement badges on your Sanskrit journey.</div>
+        </div>
+      </div>
+
+      <!-- Daily mantra -->
+      <div id="home-mantra" style="padding:0 24px;">
+        <div class="mantra-text"></div>
+        <div class="mantra-roman"></div>
+        <div class="mantra-meaning"></div>
+      </div>
+    </section>
+
+
+    <!-- ═══ ALPHABET ════════════════════════════════════════ -->
+    <section id="section-alphabet" class="section">
+      <div class="section-header">
+        <div class="section-eyebrow">Lesson 1</div>
+        <h2 class="section-title">The Alphabet</h2>
+        <div class="section-deva">वर्णमाला (Varṇamālā)</div>
+        <p class="section-sub">Sanskrit uses the Devanagari script — a scientific, phonetically perfect writing system. Click any character to explore it.</p>
+      </div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="tab-vowels">Vowels (स्वर)</button>
+        <button class="tab-btn" data-tab="tab-consonants">Consonants (व्यञ्जन)</button>
+      </div>
+
+      <div id="tab-vowels" class="tab-panel active">
+        <div style="text-align:center;padding:0 24px 20px;font-size:16px;color:var(--ink-pale);font-style:italic;">
+          Sanskrit has 13 primary vowels. They are the foundation of all syllables.
+        </div>
+        <div id="vowel-grid"></div>
+      </div>
+
+      <div id="tab-consonants" class="tab-panel">
+        <div style="text-align:center;padding:0 24px 20px;font-size:16px;color:var(--ink-pale);font-style:italic;">
+          34 consonants organized by their place of articulation — from throat to lips.
+        </div>
+        <div id="consonant-grid"></div>
+      </div>
+    </section>
+
+
+    <!-- ═══ WORDS ════════════════════════════════════════════ -->
+    <section id="section-words" class="section">
+      <div class="section-header">
+        <div class="section-eyebrow">Lesson 2</div>
+        <h2 class="section-title">Vocabulary</h2>
+        <div class="section-deva">शब्दकोश (Śabdakośa)</div>
+        <p class="section-sub">Explore Sanskrit words by category. Each card shows the Devanagari, transliteration, meaning, and usage in a sentence.</p>
+      </div>
+
+      <div class="filter-bar" id="word-filters"></div>
+      <div id="word-grid"></div>
+    </section>
+
+
+    <!-- ═══ GRAMMAR ══════════════════════════════════════════ -->
+    <section id="section-grammar" class="section">
+      <div class="section-header">
+        <div class="section-eyebrow">Lesson 3</div>
+        <h2 class="section-title">Grammar</h2>
+        <div class="section-deva">व्याकरण (Vyākaraṇa)</div>
+        <p class="section-sub">Sanskrit's grammar is remarkably systematic. Complete each lesson and mark it done to earn XP.</p>
+      </div>
+      <div id="grammar-container"></div>
+    </section>
+
+
+    <!-- ═══ QUIZ ══════════════════════════════════════════════ -->
+    <section id="section-quiz" class="section">
+      <div class="section-header">
+        <div class="section-eyebrow">Test Yourself</div>
+        <h2 class="section-title">Quiz</h2>
+        <div class="section-deva">परीक्षा (Parīkṣā)</div>
+        <p class="section-sub">Choose a category and answer 7 questions. Each correct answer earns 10 XP!</p>
+      </div>
+
+      <div class="quiz-container">
+
+        <!-- Menu -->
+        <div id="quiz-menu">
+          <div class="quiz-menu-cards">
+            <div class="quiz-menu-card" onclick="startQuiz('alphabet')">
+              <div class="qm-icon">🔤</div>
+              <div class="qm-title">Alphabet</div>
+              <div class="qm-desc">Test your knowledge of vowels and consonants</div>
+            </div>
+            <div class="quiz-menu-card" onclick="startQuiz('vocabulary')">
+              <div class="qm-icon">📚</div>
+              <div class="qm-title">Vocabulary</div>
+              <div class="qm-desc">Match Sanskrit words to their meanings</div>
+            </div>
+            <div class="quiz-menu-card" onclick="startQuiz('grammar')">
+              <div class="qm-icon">⚖️</div>
+              <div class="qm-title">Grammar</div>
+              <div class="qm-desc">Test your understanding of cases and verb forms</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active quiz -->
+        <div id="quiz-active" style="display:none;">
+          <div class="quiz-header">
+            <div class="quiz-meta">
+              <span id="quiz-question-num">Question 1 of 7</span>
+            </div>
+            <div class="quiz-prog-track">
+              <div class="quiz-prog-fill" id="quiz-progress-bar" style="width:0%"></div>
+            </div>
+          </div>
+
+          <div id="quiz-question-text" class="quiz-question-text"></div>
+          <div id="quiz-options" class="quiz-options"></div>
+          <button class="quiz-next-btn" id="quiz-next" style="display:none;">Next Question →</button>
+        </div>
+
+        <!-- Result -->
+        <div id="quiz-result" style="display:none;" class="quiz-result">
+          <span id="result-emoji" class="result-emoji">🏆</span>
+          <div class="result-stars">
+            <span class="result-star">⭐</span>
+            <span class="result-star">⭐</span>
+            <span class="result-star">⭐</span>
+          </div>
+          <div id="result-score" class="result-score"></div>
+          <div id="result-pct" class="result-pct"></div>
+          <div id="result-msg" class="result-msg"></div>
+          <div id="result-xp" class="result-xp"></div>
+          <div class="result-actions">
+            <button class="btn-primary" onclick="renderQuizMenu()">Try Again</button>
+            <button class="btn-secondary" onclick="navigate('progress')">View Progress</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══ FLASHCARDS ════════════════════════════════════════ -->
+    <section id="section-flashcards" class="section">
+      <div class="section-header">
+        <div class="section-eyebrow">Practice</div>
+        <h2 class="section-title">Flashcards</h2>
+        <div class="section-deva">स्मृतिपत्र (Smṛtipatra)</div>
+        <p class="section-sub">Classic flip-cards for Devanagari script and vocabulary practice. Click the card or the flip button to reveal.</p>
+      </div>
+
+      <div class="flashcard-setup" style="padding:0 24px 28px;">
+        <select id="flashcard-cat">
+          <option value="vowels">Vowels (स्वर)</option>
+          <option value="consonants">Consonants (व्यञ्जन)</option>
+          <option value="vocabulary">Vocabulary</option>
+        </select>
+        <button class="btn-primary" id="start-flash-btn">Start Flashcards</button>
+      </div>
+
+      <div id="flashcard-zone" style="display:none; padding:0 24px 40px;">
+        <div class="flashcard-container" onclick="flipFlashcard()">
+          <div id="flash-card">
+            <div class="flash-face flash-front">
+              <div id="flash-front">अ</div>
+              <div class="flash-hint">Tap to flip ↓</div>
+            </div>
+            <div class="flash-face flash-back">
+              <div id="flash-back">a</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flash-controls">
+          <button class="flash-btn" id="flash-prev">← Prev</button>
+          <span id="flash-count" class="flash-count">1 / 1</span>
+          <button class="flash-btn flash-flip-btn" id="flash-flip">Flip ↕</button>
+          <button class="flash-btn" id="flash-next">Next →</button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══ PROGRESS ══════════════════════════════════════════ -->
+    <section id="section-progress" class="section">
+      <div class="section-header">
+        <div class="section-eyebrow">Your Journey</div>
+        <h2 class="section-title">Progress</h2>
+        <div class="section-deva">प्रगति (Pragati)</div>
+        <p class="section-sub">Track your Sanskrit learning journey — XP earned, streaks, quiz scores and achievements.</p>
+      </div>
+
+      <div class="progress-page">
+
+        <!-- Stats -->
+        <div class="stat-cards">
+          <div class="stat-card">
+            <div class="stat-card-icon">✨</div>
+            <div class="stat-card-value" id="prog-xp">0</div>
+            <div class="stat-card-label">Total XP</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon">🔥</div>
+            <div class="stat-card-value" id="prog-streak">0 days</div>
+            <div class="stat-card-label">Study Streak</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon">📖</div>
+            <div class="stat-card-value" id="prog-lessons">0</div>
+            <div class="stat-card-label">Activities</div>
+          </div>
+        </div>
+
+        <!-- Quiz scores -->
+        <div class="progress-section">
+          <div class="progress-section-title">Quiz Best Scores</div>
+          <div id="quiz-score-list"></div>
+        </div>
+
+        <!-- Badges -->
+        <div class="progress-section">
+          <div class="progress-section-title">Achievements 🏅</div>
+          <div id="badge-container" class="badge-container"></div>
+        </div>
+
+        <!-- Danger zone -->
+        <div class="danger-zone">
+          <p>Warning: this will permanently erase all your progress and XP.</p>
+          <button class="btn-danger" id="reset-progress-btn">Reset All Progress</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main><!-- /main -->
+
+
+  <!-- ═══ LETTER MODAL ══════════════════════════════════════ -->
+  <div id="letter-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Letter details">
+    <div class="modal-box">
+      <button id="modal-close" class="modal-close" aria-label="Close">✕</button>
+      <div id="modal-type"></div>
+      <div id="modal-deva"></div>
+      <div id="modal-roman"></div>
+      <div id="modal-desc"></div>
+      <div id="modal-example"></div>
+    </div>
+  </div>
+
+  <!-- XP Toast -->
+  <div id="xp-toast" role="status" aria-live="polite"></div>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-deva">विद्यां ददाति विनयम्</div>
+    <div class="footer-meaning">"Knowledge bestows humility."</div>
+    <div style="margin-top:10px;opacity:0.5;">Sanskrit Path · Learn with joy, one letter at a time.</div>
+  </footer>
+
+</div><!-- /#app -->
+
+<!-- Scripts -->
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
