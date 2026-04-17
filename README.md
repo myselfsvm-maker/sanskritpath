@@ -22,7 +22,7 @@ sanskrit-app/
 
 ## 🚀 How to Run
 
-1. Download / unzip the folder
+1. Download
 2. Double-click `index.html`  
    *(or drag it into any modern browser — Chrome, Firefox, Safari, Edge)*
 3. No internet required after page load (fonts load from Google Fonts on first visit)
